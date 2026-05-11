@@ -291,16 +291,25 @@ function nextQ(){
 async function doSubmit(){
   state="saving"; render();
   const CR=computeCR(answers);
-  try{
-    await fetch(API_URL,{
-      method:"POST",
-      mode:"no-cors",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({name:uname, answers:[...answers], cr:+CR.toFixed(4)})
-    });
-    state="done";
-  }catch(e){ state="error"; }
-  render(); window.scrollTo(0,0);
+  const payload={name:uname,answers:[...answers],cr:+CR.toFixed(4)};
+  const encoded=encodeURIComponent(JSON.stringify(payload));
+  return new Promise((resolve)=>{
+    const cb="sc"+Date.now();
+    window[cb]=(r)=>{
+      delete window[cb];
+      const s=document.getElementById("_sc");
+      if(s)s.remove();
+      state=r&&r.success?"done":"error";
+      render();window.scrollTo(0,0);
+      resolve();
+    };
+    const s=document.createElement("script");
+    s.id="_sc";
+    s.onerror=()=>{ delete window[cb]; state="error"; render(); resolve(); };
+    s.src=API_URL+"?method=post&data="+encoded+"&callback="+cb;
+    document.head.appendChild(s);
+    setTimeout(()=>{ if(window[cb]){ delete window[cb]; state="done"; render(); resolve(); } },10000);
+  });
 }
 
 function restart(){ state="intro"; cur=0; answers=new Array(TOTAL).fill(8); uname=""; render(); }
