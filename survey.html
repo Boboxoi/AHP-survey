@@ -93,7 +93,7 @@ input[type=range]::-moz-range-thumb{width:28px;height:28px;border-radius:50%;bac
 
 <script>
 // ⚠️ ЭНЭХҮҮ URL-ийг ӨӨРИЙН Apps Script deployment URL-аар солино уу
-const API_URL = "https://script.google.com/macros/s/AKfycbxVF61GhWq-xlYXJ_cmTiie4DH6jYlwOmzqV7xXxN4_lsf2xTBRj4x7KFc6HXNcP8Wt/exec";
+const API_URL = "YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
 
 const crits = [
   {id:"F1", label:"Хот суурины газруудыг холбон хөгжүүлэх боломж"},
@@ -292,13 +292,13 @@ async function doSubmit(){
   state="saving"; render();
   const CR=computeCR(answers);
   try{
-    const resp=await fetch(API_URL,{
+    await fetch(API_URL,{
       method:"POST",
+      mode:"no-cors",
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify({name:uname, answers:[...answers], cr:+CR.toFixed(4)})
     });
-    const data=await resp.json();
-    state=data.success?"done":"error";
+    state="done";
   }catch(e){ state="error"; }
   render(); window.scrollTo(0,0);
 }
