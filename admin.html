@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AHP Удирдлагын самбар</title>
+<style>
+:root{
+  --b:#185fa5; --bd:#0c447c; --bl:#e6f1fb;
+  --g:#0f9e6e; --gd:#085040; --gl:#e6f7f1;
+  --t:#1a1a1a; --tm:#5f6672; --ts:#9ca3af;
+  --bg:#f5f7fa; --s:#fff; --br:#e5e7eb;
+  --r:14px; --rs:8px;
+}
+@media(prefers-color-scheme:dark){
+  :root{ --t:#f0f0ee; --tm:#9ca3af; --ts:#6b7280;
+    --bg:#0f1117; --s:#1a1d24; --br:#252a32;
+    --bl:#0c1e33; --bd:#85b7eb; --gl:#0a2218; --gd:#4fe6a8; }
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--t);min-height:100vh;padding-bottom:40px}
+.hdr{background:linear-gradient(135deg,#042c53,#185fa5);color:#fff;padding:22px 24px 18px;position:sticky;top:0;z-index:50}
+.hdr h1{font-size:18px;font-weight:700;letter-spacing:.2px}
+.hdr p{font-size:12px;opacity:.7;margin-top:3px}
+.hdr-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.ref-btn{padding:8px 16px;border-radius:var(--rs);border:1.5px solid rgba(255,255,255,.4);background:rgba(255,255,255,.12);color:#fff;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px}
+.ref-btn:active{background:rgba(255,255,255,.2)}
+.main{padding:18px;max-width:860px;margin:0 auto}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:6px}
+.stat{background:var(--s);border:1px solid var(--br);border-radius:var(--r);padding:18px;display:flex;align-items:center;gap:14px}
+.stat-ic{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.stat-ic-b{background:var(--bl)}
+.stat-ic-g{background:var(--gl)}
+.stat-ic-a{background:#fef3c7}
+.stat-v{font-size:30px;font-weight:700;color:var(--b);line-height:1}
+.stat-vg{color:var(--g)}
+.stat-va{color:#d97706}
+.stat-l{font-size:12px;color:var(--tm);margin-top:4px}
+.sec-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--ts);margin:20px 0 10px}
+.card{background:var(--s);border:1px solid var(--br);border-radius:var(--r);padding:18px;margin-bottom:14px}
+.card-ttl{font-size:15px;font-weight:700;color:var(--t);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.meth-note{font-size:12px;color:var(--ts);background:var(--bg);border-radius:var(--rs);padding:9px 12px;margin-bottom:14px;line-height:1.55}
+.res-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.res-row:last-child{margin-bottom:0}
+.rank-b{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.r1{background:#fef3c7;color:#92400e}
+.r2{background:#f3f4f6;color:#374151}
+.r3{background:#fef9c3;color:#854d0e}
+.rn{background:var(--bg);color:var(--ts)}
+.res-name{font-size:13px;color:var(--t);flex:1;min-width:0}
+.res-code{font-size:10px;font-weight:800;color:var(--b);margin-right:6px;min-width:32px;display:inline-block}
+.bar-bg{height:8px;background:var(--bg);border-radius:99px;flex:1.5;min-width:60px}
+.bar-fill{height:8px;background:var(--b);border-radius:99px;transition:width .8s ease}
+.res-pct{font-size:13px;font-weight:700;color:var(--bd);min-width:46px;text-align:right}
+.resp-table{width:100%;border-collapse:collapse}
+.resp-table th{font-size:11px;font-weight:600;color:var(--ts);text-transform:uppercase;letter-spacing:.5px;padding:8px 10px;text-align:left;border-bottom:1px solid var(--br)}
+.resp-table td{font-size:13px;color:var(--t);padding:10px;border-bottom:1px solid var(--bg)}
+.resp-table tr:last-child td{border-bottom:none}
+.resp-table tr:hover td{background:var(--bg)}
+.av{width:32px;height:32px;border-radius:50%;background:var(--bl);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--bd)}
+.cr-ok{background:#dcfce7;color:#166534;border-radius:99px;padding:3px 10px;font-size:11px;font-weight:700;display:inline-block}
+.cr-warn{background:#fef3c7;color:#92400e;border-radius:99px;padding:3px 10px;font-size:11px;font-weight:700;display:inline-block}
+.cr-bad{background:#fee2e2;color:#991b1b;border-radius:99px;padding:3px 10px;font-size:11px;font-weight:700;display:inline-block}
+.del-btn{background:none;border:none;color:var(--ts);cursor:pointer;font-size:18px;padding:4px 8px;border-radius:6px;line-height:1}
+.del-btn:hover{color:#dc2626;background:#fee2e2}
+.act-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.act-btn{padding:11px 20px;border-radius:var(--rs);font-size:13px;font-weight:600;cursor:pointer;border:1.5px solid;display:flex;align-items:center;gap:6px;transition:all .15s}
+.act-btn:active{transform:scale(.97)}
+.btn-export{background:var(--b);color:#fff;border-color:var(--b)}
+.btn-ref{background:var(--s);color:var(--t);border-color:var(--br)}
+.btn-del{background:var(--s);color:#dc2626;border-color:#fca5a5}
+.cfg-card{background:var(--bl);border:1px solid #b5d4f4;border-radius:var(--r);padding:18px;margin-bottom:14px}
+.cfg-ttl{font-size:14px;font-weight:700;color:var(--bd);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.cfg-step{font-size:13px;color:var(--t);margin-bottom:8px;padding-left:4px;line-height:1.6}
+.cfg-step code{background:var(--bg);padding:2px 7px;border-radius:5px;font-family:monospace;font-size:12px;color:var(--b)}
+.url-row{display:flex;gap:8px;margin-top:10px}
+.url-inp{flex:1;padding:10px 12px;border:1.5px solid var(--br);border-radius:var(--rs);font-size:13px;background:var(--s);color:var(--t);outline:none}
+.url-inp:focus{border-color:var(--b)}
+.url-btn{padding:10px 16px;border-radius:var(--rs);background:var(--b);color:#fff;border:none;font-size:13px;font-weight:600;cursor:pointer}
+.url-btn:active{background:var(--bd)}
+.empty{text-align:center;padding:32px 16px;color:var(--tm);font-size:14px;line-height:1.7}
+.spin{display:inline-block;animation:spin .8s linear infinite;font-size:18px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.alert-box{border-radius:var(--rs);padding:12px 14px;font-size:13px;line-height:1.55;margin-bottom:12px}
+.alert-warn{background:#fef3c7;border:1px solid #fde68a;color:#92400e}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(60px);background:#1a1a1a;color:#fff;padding:11px 22px;border-radius:99px;font-size:13px;font-weight:500;transition:transform .3s ease;z-index:999}
+.toast.show{transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-row">
+    <div>
+      <h1>📊 AHP Удирдлагын самбар</h1>
+      <p>Хариуцагчдын нэгдсэн үр дүн</p>
+    </div>
+    <button class="ref-btn" onclick="loadAndRender()">↻ Шинэчлэх</button>
+  </div>
+</div>
+
+<div class="main" id="main">
+  <div style="text-align:center;padding:48px;color:var(--tm)"><span class="spin">⟳</span></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const crits=[
+  {id:"F1",label:"Хот суурины газруудыг холбон хөгжүүлэх боломж"},
+  {id:"F2",label:"Татагдах болон холбогдох хүн амын тоо"},
+  {id:"F3",label:"Бүс нутгийн хамтын ажиллагаа, тээврийн коридортой уялдах байдал"},
+  {id:"F4",label:"Хөрш орнуудын тээврийн коридортой холбогдох боломж"},
+  {id:"F5",label:"Аж үйлдвэрийн хөгжлийг дэмжих боломж"},
+  {id:"F6",label:"Маршрутын нөхцөл байдал"},
+  {id:"F7",label:"Хилийн боомтын нөхцөл байдал"},
+  {id:"F9",label:"Гадаргын бартаажилтын байдал"},
+  {id:"F10",label:"Бүс нутгийн эрчим хүчний хангамж"},
+  {id:"Ачаа",label:"Ачаа тээврийн боломж"}
+];
+const n=crits.length;
+const pairs=[];
+for(let i=0;i<n;i++) for(let j=i+1;j<n;j++) pairs.push([i,j]);
+const SM=[9,8,7,6,5,4,3,2,1,0.5,1/3,0.25,0.2,1/6,1/7,.125,1/9];
+const RI=[0,0,.58,.9,1.12,1.24,1.32,1.41,1.45,1.49,1.51];
+
+let API_URL=localStorage.getItem("ahp_api_url")||"";
+
+function sv(i){return SM[parseInt(i)];}
+
+function computeAHP(ans){
+  const mat=Array.from({length:n},()=>new Array(n).fill(1));
+  pairs.forEach(([i,j],k)=>{const v=sv(ans[k]);mat[i][j]=v;mat[j][i]=1/v;});
+  const cs=Array(n).fill(0);
+  for(let j2=0;j2<n;j2++) for(let i=0;i<n;i++) cs[j2]+=mat[i][j2];
+  const norm=mat.map(r=>r.map((v,j2)=>v/cs[j2]));
+  const w=norm.map(r=>r.reduce((s,v)=>s+v,0)/n);
+  const wv=Array(n).fill(0);
+  for(let i=0;i<n;i++) for(let j2=0;j2<n;j2++) wv[i]+=mat[i][j2]*w[j2];
+  const lm=wv.reduce((s,v,i)=>s+v/w[i],0)/n;
+  const CI=(lm-n)/(n-1);
+  const CR=CI/(RI[n]||1.49);
+  return{weights:w,CR};
+}
+
+function aggregateGM(recs){
+  if(!recs.length) return null;
+  const TOTAL=pairs.length;
+  const aggAns=[];
+  for(let k=0;k<TOTAL;k++){
+    const vals=recs.map(r=>sv(r.answers[k]));
+    const gm=Math.pow(vals.reduce((p,v)=>p*v,1),1/vals.length);
+    const closest=SM.reduce((best,v,i)=>Math.abs(v-gm)<Math.abs(SM[best]-gm)?i:best,0);
+    aggAns.push(closest);
+  }
+  const{weights,CR}=computeAHP(aggAns);
+  return{weights,CR,count:recs.length};
+}
+
+function timeAgo(ts){
+  const d=Math.floor((Date.now()-new Date(ts))/1000);
+  if(d<60) return d+"с өмнө";
+  if(d<3600) return Math.floor(d/60)+"м өмнө";
+  if(d<86400) return Math.floor(d/3600)+"ц өмнө";
+  return Math.floor(d/86400)+"өдрийн өмнө";
+}
+
+function initials(name){return name.trim().split(/\s+/).map(w=>w[0]).join("").slice(0,2).toUpperCase();}
+
+function showToast(msg){
+  const t=document.getElementById("toast");
+  t.textContent=msg; t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),2400);
+}
+
+async function saveApiUrl(url){
+  API_URL=url.trim();
+  localStorage.setItem("ahp_api_url",API_URL);
+  showToast("✓ URL хадгалагдлаа");
+  await loadAndRender();
+}
+
+async function fetchData(){
+  if(!API_URL) return null;
+  try{
+    const r=await fetch(API_URL);
+    const d=await r.json();
+    return d.responses||[];
+  }catch(e){return null;}
+}
+
+async function deleteResp(name){
+  if(!confirm(`"${name}" -ийн хариуг устгах уу?`)) return;
+  try{
+    await fetch(API_URL+"?action=delete&name="+encodeURIComponent(name));
+    showToast("✓ Устгагдлаа");
+    await loadAndRender();
+  }catch(e){
+    showToast("Устгаж чадсангүй");
+  }
+}
+
+function exportCSV(responses){
+  const valid=responses.filter(r=>r.cr<0.2);
+  const agg=aggregateGM(valid);
+  let csv="Кодирдлагын үр дүн\n\n";
+  if(agg){
+    csv+="Эрэмбэ,Код,Шалгуур,Жин (%)\n";
+    const sorted=crits.map((c,i)=>({...c,w:agg.weights[i]})).sort((a,b)=>b.w-a.w);
+    sorted.forEach((c,r)=>{ csv+=(r+1)+","+c.id+",\""+c.label+"\","+(c.w*100).toFixed(2)+"\n"; });
+    csv+="\n";
+  }
+  csv+="Хариулагч,CR (%),Тогтворжилт,Огноо\n";
+  responses.forEach(r=>{
+    csv+=`"${r.name}",${(r.cr*100).toFixed(1)},${r.cr<0.2?"Тийм":"Үгүй"},"${new Date(r.ts).toLocaleString("mn-MN")}"\n`;
+  });
+  const blob=new Blob(["\uFEFF"+csv],{type:"text/csv;charset=utf-8"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="AHP_Results.csv";
+  a.click();
+  showToast("✓ CSV татагдлаа");
+}
+
+async function loadAndRender(){
+  const main=document.getElementById("main");
+  main.innerHTML=`<div style="text-align:center;padding:48px;color:var(--tm)"><span class="spin">⟳</span></div>`;
+
+  if(!API_URL){
+    renderSetup(main); return;
+  }
+
+  const responses=await fetchData();
+  if(responses===null){
+    main.innerHTML=`
+      <div class="alert-box alert-warn">API холболт амжилтгүй боллоо. URL зөв эсэхийг шалгана уу.</div>`;
+    renderSetup(main,true); return;
+  }
+
+  renderDash(main,responses);
+}
+
+function renderSetup(main,append=false){
+  const html=`
+  <div class="cfg-card">
+    <div class="cfg-ttl">⚙️ Apps Script URL тохиргоо</div>
+    <div class="cfg-step">1. <a href="https://sheets.google.com" target="_blank" style="color:var(--b)">Google Sheets</a> дээр шинэ хүснэгт нээ</div>
+    <div class="cfg-step">2. <code>Extensions → Apps Script</code> → <code>apps_script.gs</code> кодыг хуулж тавь</div>
+    <div class="cfg-step">3. <code>Deploy → New deployment → Web app</code> → <code>Anyone</code> → URL-ийг хуулж тав</div>
+    <div class="url-row">
+      <input class="url-inp" id="urlInp" type="url" placeholder="https://script.google.com/macros/s/..." value="${API_URL}">
+      <button class="url-btn" onclick="saveApiUrl(document.getElementById('urlInp').value)">Хадгалах</button>
+    </div>
+  </div>`;
+  if(append) main.insertAdjacentHTML("beforeend",html);
+  else main.innerHTML=html;
+}
+
+function renderDash(main,responses){
+  const valid=responses.filter(r=>r.cr<0.2);
+  const invalid=responses.filter(r=>r.cr>=0.2);
+  const agg=aggregateGM(valid);
+
+  let html="";
+
+  // Stats
+  html+=`<div class="grid2">
+    <div class="stat"><div class="stat-ic stat-ic-b">👥</div>
+      <div><div class="stat-v">${responses.length}</div><div class="stat-l">Нийт хариулагч</div></div></div>
+    <div class="stat"><div class="stat-ic stat-ic-g">✅</div>
+      <div><div class="stat-v stat-vg">${valid.length}</div><div class="stat-l">Тогтворжсон (CR&lt;20%)</div></div></div>
+  </div>`;
+
+  // Aggregated result
+  if(agg){
+    const sorted=crits.map((c,i)=>({...c,w:agg.weights[i]})).sort((a,b)=>b.w-a.w);
+    const maxW=sorted[0].w;
+    const crOk=agg.CR<0.1;
+    html+=`<div class="sec-lbl">Нэгдсэн жингийн үр дүн</div>
+    <div class="card">
+      <div class="card-ttl">🏆 Шалгуур үзүүлэлтийн жин <span style="font-size:12px;color:var(--ts);font-weight:400">${agg.count} хариулагчийн нэгдсэн дундаж</span></div>
+      <div class="meth-note">Геометрийн дундаж аргаар (AHP стандарт) CR&lt;20% хариуцагчдын нэгтгэл. Нэгдсэн CR: <strong style="color:${crOk?"var(--g)":"#d97706"}">${(agg.CR*100).toFixed(1)}%</strong></div>
+      ${sorted.map((c,r)=>{
+        const rk=r===0?"r1":r===1?"r2":r===2?"r3":"rn";
+        const pct=Math.round(c.w/maxW*100);
+        return`<div class="res-row">
+          <div class="rank-b ${rk}">${r+1}</div>
+          <div class="res-name"><span class="res-code">${c.id}</span>${c.label}</div>
+          <div class="bar-bg"><div class="bar-fill" style="width:${pct}%"></div></div>
+          <div class="res-pct">${(c.w*100).toFixed(1)}%</div>
+        </div>`;
+      }).join("")}
+    </div>`;
+  } else if(responses.length>0){
+    html+=`<div class="card"><div class="empty">Тогтворжсон хариу байхгүй байна.<br>CR &lt; 20% хариу хүлээнэ үү.</div></div>`;
+  }
+
+  // Respondent list
+  html+=`<div class="sec-lbl">Хариулагчдын жагсаалт</div>
+  <div class="card">`;
+  if(responses.length===0){
+    html+=`<div class="empty">Одоогоор хариу ирээгүй байна.<br>survey.html хуудсыг хариулагчдад илгээнэ үү.</div>`;
+  } else {
+    html+=`<table class="resp-table">
+      <thead><tr>
+        <th>Хариулагч</th><th>CR</th><th>Огноо</th><th></th>
+      </tr></thead><tbody>
+      ${responses.slice().reverse().map(r=>{
+        const crCls=r.cr<0.1?"cr-ok":r.cr<0.2?"cr-warn":"cr-bad";
+        const crTxt=(r.cr*100).toFixed(1)+"%";
+        return`<tr>
+          <td><div style="display:flex;align-items:center;gap:10px">
+            <div class="av">${initials(r.name)}</div>
+            <div><div style="font-weight:600">${r.name}</div>
+            <div style="font-size:11px;color:var(--ts)">${timeAgo(r.ts)}</div></div>
+          </div></td>
+          <td><span class="${crCls}">${crTxt}</span></td>
+          <td style="font-size:12px;color:var(--ts)">${new Date(r.ts).toLocaleDateString("mn-MN")}</td>
+          <td><button class="del-btn" onclick="deleteResp('${r.name.replace(/'/g,"\\'")}')">×</button></td>
+        </tr>`;
+      }).join("")}
+      </tbody></table>`;
+  }
+  html+=`</div>`;
+
+  // Actions
+  html+=`<div class="act-row">
+    <button class="act-btn btn-export" onclick="exportCSV(${JSON.stringify(responses).replace(/</g,"\\u003c")})">📥 CSV татах</button>
+    <button class="act-btn btn-ref" onclick="loadAndRender()">↻ Шинэчлэх</button>
+    <button class="act-btn btn-del" onclick="if(confirm('Бүх хариуг устгах уу?')){}">🗑 Бүгдийг устгах</button>
+  </div>`;
+
+  // API settings (collapsed)
+  html+=`<div class="sec-lbl" style="margin-top:24px">⚙️ API тохиргоо</div>
+  <div class="cfg-card">
+    <div class="url-row">
+      <input class="url-inp" id="urlInp" type="url" placeholder="Apps Script URL..." value="${API_URL}">
+      <button class="url-btn" onclick="saveApiUrl(document.getElementById('urlInp').value)">Хадгалах</button>
+    </div>
+  </div>`;
+
+  main.innerHTML=html;
+}
+
+loadAndRender();
+</script>
+</body>
+</html>
