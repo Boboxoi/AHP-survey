@@ -36,21 +36,32 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .scl h4{font-size:11px;font-weight:700;color:var(--gd);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
 .sr{display:flex;justify-content:space-between;font-size:12px;color:var(--tm);margin-bottom:4px}
 .sv{font-weight:700;color:var(--gd)}
+.fl{font-size:12px;font-weight:600;color:var(--tm);margin:10px 0 4px;display:block}
 .ni{width:100%;padding:12px 13px;border:1.5px solid var(--b);border-radius:var(--rs);font-size:15px;background:var(--bg);color:var(--t);margin-bottom:4px;outline:none;-webkit-appearance:none}
 .ni:focus{border-color:var(--g)}
-.nh{font-size:12px;color:var(--ts);margin-bottom:14px}
+.nh{font-size:12px;color:var(--ts);margin:8px 0 14px}
 .sbtn{width:100%;padding:14px;background:var(--g);color:#fff;border:none;border-radius:var(--rs);font-size:16px;font-weight:600;cursor:pointer;letter-spacing:.2px}
 .sbtn:active{background:var(--gd);transform:scale(.98)}
 .sbtn:disabled{opacity:.5;cursor:not-allowed}
 .qn{font-size:11px;color:var(--ts);font-weight:600;text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px}
 .qi{font-size:13px;color:var(--tm);margin-bottom:14px;line-height:1.55}
-.cg{display:flex;gap:7px;align-items:stretch;margin-bottom:16px}
-.cp{flex:1;background:var(--bg);border:2px solid var(--b);border-radius:10px;padding:12px 9px;text-align:center;transition:border-color .2s,background .2s;min-height:80px;display:flex;flex-direction:column;justify-content:center}
+.cg{display:flex;gap:7px;align-items:stretch;margin-bottom:10px}
+.cp{flex:1;background:var(--bg);border:2px solid var(--b);border-radius:10px;padding:12px 9px;text-align:center;transition:border-color .2s,background .2s;min-height:92px;display:flex;flex-direction:column;justify-content:center}
 .cp.al{border-color:var(--g);background:var(--gl)}
 .cp.ar{border-color:var(--g);background:var(--gl)}
 .cp .code{font-size:10px;font-weight:800;color:var(--g);margin-bottom:5px;letter-spacing:.3px}
-.cp .nm{font-size:11px;color:var(--t);line-height:1.4;font-weight:500}
+.cp .nm{font-size:11.5px;color:var(--t);line-height:1.4;font-weight:500}
 .vs{font-size:10px;color:var(--ts);font-weight:700;align-self:center;flex-shrink:0}
+.subwrap{display:flex;gap:7px;margin-bottom:16px}
+.subbox{flex:1}
+.subbox details{font-size:10px}
+.subbox summary{cursor:pointer;color:var(--g);font-weight:600;list-style:none;padding:4px 6px;text-align:center;border-radius:6px;background:var(--gl)}
+.subbox summary::-webkit-details-marker{display:none}
+.subbox summary::after{content:" ▾"}
+.subbox details[open] summary::after{content:" ▴"}
+.subul{margin:6px 2px 0;padding:8px 9px;background:var(--bg);border:1px solid var(--b);border-radius:8px;list-style:none}
+.subul li{font-size:10.5px;color:var(--tm);line-height:1.6;padding-left:10px;position:relative}
+.subul li::before{content:"•";position:absolute;left:0;color:var(--g)}
 .slw{margin-bottom:12px}
 .sll{display:flex;justify-content:space-between;margin-bottom:5px}
 .sll span{font-size:10px;color:var(--ts);max-width:70px;text-align:center;line-height:1.3}
@@ -93,20 +104,27 @@ input[type=range]::-moz-range-thumb{width:28px;height:28px;border-radius:50%;bac
 
 <script>
 // ⚠️ ЭНЭХҮҮ URL-ийг ӨӨРИЙН Apps Script deployment URL-аар солино уу
-const API_URL = "https://script.google.com/macros/s/AKfycbw0tRnTsCVuPVySxliI1x2cZz04s8n2r3ED0zVfzkXGjRNWW_ki7oCi1pf8YjeWR9kJ/exec";
+const API_URL = "YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
 
 const crits = [
-  {id:"F1", label:"Хот суурины газруудыг холбон хөгжүүлэх боломж"},
-  {id:"F2", label:"Татагдах болон холбогдох хүн амын тоо"},
-  {id:"F3", label:"Бүс нутгийн хамтын ажиллагаа, тээврийн коридортой уялдах байдал"},
-  {id:"F4", label:"Хөрш орнуудын тээврийн коридортой холбогдох боломж"},
-  {id:"F5", label:"Аж үйлдвэрийн хөгжлийг дэмжих боломж"},
-  {id:"F6", label:"Нийт маршрутад эзлэх хувь (F6)"},
-  {id:"F7", label:"Хилийн боомтын нөхцөл байдал"},
-  {id:"F9", label:"Гадаргын бартаажилтын байдал"},
-  {id:"F10", label:"Бүс нутгийн эрчим хүчний хангамж"},
-  {id:"Ачаа", label:"Ачаа тээврийн боломж"}
+  { id:"C1", label:"Ачаа тээврийн хэмжээ",
+    subs:["Уул уурхайн бүтээгдэхүүний нөөц","Хүнд үйлдвэрийн бүтээгдэхүүний хэмжээ","Барилгын материалийн үйлдвэрлэлийн хэмжээ","Газар тариалангийн бүтээгдэхүүн үйлдвэрлэлийн хэмжээ"] },
+  { id:"C2", label:"Бүс нутгийн эдийн засгийн хамтын ажиллагаатай уялдаатай байдал",
+    subs:["CAREC","BRI","GTI","ESCAP","ОУТЗХАБ"] },
+  { id:"C3", label:"Хөрш орнуудын эдийн засгийн хамтын ажиллагаатай уялдаатай байдал",
+    subs:["TEA ROAD","CMREC"] },
+  { id:"C4", label:"Эрчим хүчний сүлжээнд хамрагдах байдал",
+    subs:["Эрчим хүчний эх үүсвэрийн ойр байдал","ЦДАШ-н ойр байдал"] },
+  { id:"C5", label:"Хилийн боомтын чадавхын үнэлгээ",
+    subs:["Хилийн боомтын дэглэм","Далайн боомт хүртэлх зай","Хилийн боомт — хөрш орны төмөр зам хоорондын холболт хийгдсэн эсэх"] },
+  { id:"C6", label:"Логистик төвтэй холбогдох боломж",
+    subs:["Хамгийн ойрын төмөр зам хүртэлх зай","Хамгийн ойр логистикийн төв хүртэлх зай"] },
+  { id:"C7", label:"Гадаад зах зээлийн үнэлгээ",
+    subs:["Хилийн орчмын бүсийн эдийн засгийн чадавх","ОХУ-ын экспортын нийлүүлэлт","Хятадын экспортын нийлүүлэлт","ОХУ-ын импортын эрэлт","Хятадын импортын эрэлт"] },
+  { id:"C8", label:"Орон нутгийн хөгжлийн төвүүдийн хүн амын төвлөрөл",
+    subs:["Хүн амын төвлөрлийн индекс"] }
 ];
+
 const n = crits.length;
 const pairs = [];
 for(let i=0;i<n;i++) for(let j=i+1;j<n;j++) pairs.push([i,j]);
@@ -114,7 +132,8 @@ const TOTAL = pairs.length;
 const SM = [9,8,7,6,5,4,3,2,1,0.5,1/3,0.25,0.2,1/6,1/7,.125,1/9];
 const RI = [0,0,.58,.9,1.12,1.24,1.32,1.41,1.45,1.49,1.51];
 
-let state="intro", cur=0, answers=new Array(TOTAL).fill(8), uname="";
+let state="intro", cur=0, answers=new Array(TOTAL).fill(8);
+let uorg="", upos="", uname="", uemail="";
 
 function sv(i){return SM[parseInt(i)];}
 
@@ -155,6 +174,12 @@ function updProg(){
   } else pw.style.display="none";
 }
 
+function subListHtml(idx){
+  const arr = crits[idx].subs || [];
+  if(!arr.length) return "";
+  return `<li>${arr.join("</li><li>")}</li>`;
+}
+
 function render(){
   const app=document.getElementById("app");
   updProg();
@@ -163,11 +188,12 @@ function render(){
     app.innerHTML=`
     <div class="card">
       <div class="intro-ttl">Тавтай морилно уу!</div>
-      <div class="intro-p">Энэхүү судалгаа нь <strong>AHP аргаар</strong> төмөр замын маршрут сонгох шалгуур үзүүлэлтүүдийн харьцангуй жинг тодорхойлоход зориулагдсан.</div>
+      <div class="intro-p">Энэхүү судалгаа нь <strong>AHP аргаар</strong> төмөр замын маршрут сонгох ерөнхий шалгуур үзүүлэлтүүдийн харьцангуй жинг тодорхойлоход зориулагдсан.</div>
       <div class="slist">
-        <div class="si"><div class="sn">1</div><div class="st">Нэрээ оруулна уу</div></div>
+        <div class="si"><div class="sn">1</div><div class="st">Мэдээллээ бөглөнө үү</div></div>
         <div class="si"><div class="sn">2</div><div class="st"><strong>${TOTAL} хос</strong> шалгуурыг харьцуулж, аль нь чухал болохыг заана</div></div>
-        <div class="si"><div class="sn">3</div><div class="st">Дуусмагц таны хариу автоматаар нэгдсэн системд хадгалагдана</div></div>
+        <div class="si"><div class="sn">3</div><div class="st">Шалгуур бүрийн доорх "▾" товчоор багтаасан дэд шалгуурыг харж болно</div></div>
+        <div class="si"><div class="sn">4</div><div class="st">Дуусмагц таны хариу автоматаар нэгдсэн системд хадгалагдана</div></div>
       </div>
       <div class="scl">
         <h4>Харьцуулалтын оноо</h4>
@@ -177,11 +203,23 @@ function render(){
         <div class="sr"><span class="sv">7</span><span>Маш давуу</span></div>
         <div class="sr"><span class="sv">9</span><span>Хамгийн их давуу</span></div>
       </div>
-      <input class="ni" type="text" id="nIn" placeholder="Таны нэр..." maxlength="30" inputmode="text">
-      <div class="nh">Нэр нь үр дүнд ялгах зорилгоор хэрэглэгдэнэ</div>
+
+      <label class="fl">Байгууллага</label>
+      <input class="ni" type="text" id="orgIn" placeholder="Байгууллагын нэр..." maxlength="80" inputmode="text">
+
+      <label class="fl">Албан тушаал</label>
+      <input class="ni" type="text" id="posIn" placeholder="Албан тушаал..." maxlength="60" inputmode="text">
+
+      <label class="fl">Овог нэр</label>
+      <input class="ni" type="text" id="nIn" placeholder="Овог, нэр..." maxlength="50" inputmode="text">
+
+      <label class="fl">И-мэйл</label>
+      <input class="ni" type="email" id="emailIn" placeholder="И-мэйл хаяг..." maxlength="60" inputmode="email">
+
+      <div class="nh">Мэдээлэл нь үр дүнг ялгах, холбоо барих зорилгоор хэрэглэгдэнэ</div>
       <button class="sbtn" onclick="doStart()">Судалгаа эхлэх →</button>
     </div>`;
-    const inp=document.getElementById("nIn");
+    const inp=document.getElementById("orgIn");
     if(inp) setTimeout(()=>inp.focus(),100);
     return;
   }
@@ -192,7 +230,7 @@ function render(){
     app.innerHTML=`
     <div class="card">
       <div class="qn">Асуулт ${cur+1} / ${TOTAL}</div>
-      <div class="qi">Доорх хоёр шалгуурын аль нь илүү чухал вэ?</div>
+      <div class="qi">Доорх хоёр ерөнхий шалгуурын аль нь илүү чухал вэ?</div>
       <div class="cg">
         <div class="cp${isL?" al":""}">
           <div class="code">${crits[i].id}</div>
@@ -202,6 +240,18 @@ function render(){
         <div class="cp${isR?" ar":""}">
           <div class="code">${crits[j].id}</div>
           <div class="nm">${crits[j].label}</div>
+        </div>
+      </div>
+      <div class="subwrap">
+        <div class="subbox">
+          <details><summary>Дэд шалгуур</summary>
+            <ul class="subul">${subListHtml(i)}</ul>
+          </details>
+        </div>
+        <div class="subbox">
+          <details><summary>Дэд шалгуур</summary>
+            <ul class="subul">${subListHtml(j)}</ul>
+          </details>
         </div>
       </div>
       <div class="slw">
@@ -273,10 +323,31 @@ function rfrsh(val){
 }
 
 function doStart(){
-  const inp=document.getElementById("nIn");
-  const nm=(inp?inp.value.trim():"");
-  if(!nm){ if(inp){inp.style.borderColor="#dc2626";inp.focus();} return; }
-  uname=nm; state="survey"; cur=0; answers=new Array(TOTAL).fill(8); render(); window.scrollTo(0,0);
+  const orgInp=document.getElementById("orgIn");
+  const posInp=document.getElementById("posIn");
+  const nInp=document.getElementById("nIn");
+  const emailInp=document.getElementById("emailIn");
+
+  const org=(orgInp?orgInp.value.trim():"");
+  const pos=(posInp?posInp.value.trim():"");
+  const nm=(nInp?nInp.value.trim():"");
+  const email=(emailInp?emailInp.value.trim():"");
+
+  let firstInvalid=null;
+  if(!org) firstInvalid=orgInp;
+  else if(!pos) firstInvalid=posInp;
+  else if(!nm) firstInvalid=nInp;
+  else if(!email) firstInvalid=emailInp;
+
+  if(firstInvalid){
+    [orgInp,posInp,nInp,emailInp].forEach(el=>{ if(el) el.style.borderColor="var(--b)"; });
+    firstInvalid.style.borderColor="#dc2626";
+    firstInvalid.focus();
+    return;
+  }
+
+  uorg=org; upos=pos; uname=nm; uemail=email;
+  state="survey"; cur=0; answers=new Array(TOTAL).fill(8); render(); window.scrollTo(0,0);
 }
 
 function prevQ(){ if(cur>0){cur--;render();window.scrollTo(0,0);} }
@@ -291,7 +362,7 @@ function nextQ(){
 async function doSubmit(){
   state="saving"; render();
   const CR=computeCR(answers);
-  const payload={name:uname,answers:[...answers],cr:+CR.toFixed(4)};
+  const payload={name:uname,org:uorg,position:upos,email:uemail,answers:[...answers],cr:+CR.toFixed(4)};
   const encoded=encodeURIComponent(JSON.stringify(payload));
   return new Promise((resolve)=>{
     const cb="sc"+Date.now();
@@ -312,7 +383,7 @@ async function doSubmit(){
   });
 }
 
-function restart(){ state="intro"; cur=0; answers=new Array(TOTAL).fill(8); uname=""; render(); }
+function restart(){ state="intro"; cur=0; answers=new Array(TOTAL).fill(8); uorg=""; upos=""; uname=""; uemail=""; render(); }
 
 render();
 </script>
