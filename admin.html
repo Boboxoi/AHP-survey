@@ -25,39 +25,40 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .hdr-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .ref-btn{padding:8px 16px;border-radius:var(--rs);border:1.5px solid rgba(255,255,255,.4);background:rgba(255,255,255,.12);color:#fff;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px}
 .ref-btn:active{background:rgba(255,255,255,.2)}
-.main{padding:18px;max-width:860px;margin:0 auto}
+.main{padding:18px;max-width:980px;margin:0 auto}
 .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:6px}
 .stat{background:var(--s);border:1px solid var(--br);border-radius:var(--r);padding:18px;display:flex;align-items:center;gap:14px}
 .stat-ic{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
 .stat-ic-b{background:var(--bl)}
 .stat-ic-g{background:var(--gl)}
-.stat-ic-a{background:#fef3c7}
 .stat-v{font-size:30px;font-weight:700;color:var(--b);line-height:1}
 .stat-vg{color:var(--g)}
-.stat-va{color:#d97706}
 .stat-l{font-size:12px;color:var(--tm);margin-top:4px}
 .sec-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--ts);margin:20px 0 10px}
 .card{background:var(--s);border:1px solid var(--br);border-radius:var(--r);padding:18px;margin-bottom:14px}
-.card-ttl{font-size:15px;font-weight:700;color:var(--t);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.card-ttl{font-size:15px;font-weight:700;color:var(--t);margin-bottom:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .meth-note{font-size:12px;color:var(--ts);background:var(--bg);border-radius:var(--rs);padding:9px 12px;margin-bottom:14px;line-height:1.55}
-.res-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.res-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px}
 .res-row:last-child{margin-bottom:0}
-.rank-b{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.rank-b{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px}
 .r1{background:#fef3c7;color:#92400e}
 .r2{background:#f3f4f6;color:#374151}
 .r3{background:#fef9c3;color:#854d0e}
 .rn{background:var(--bg);color:var(--ts)}
+.res-body{flex:1;min-width:0}
+.res-toprow{display:flex;align-items:center;gap:10px}
 .res-name{font-size:13px;color:var(--t);flex:1;min-width:0}
-.res-code{font-size:10px;font-weight:800;color:var(--b);margin-right:6px;min-width:32px;display:inline-block}
+.res-code{font-size:10px;font-weight:800;color:var(--b);margin-right:6px;min-width:24px;display:inline-block}
 .bar-bg{height:8px;background:var(--bg);border-radius:99px;flex:1.5;min-width:60px}
 .bar-fill{height:8px;background:var(--b);border-radius:99px;transition:width .8s ease}
 .res-pct{font-size:13px;font-weight:700;color:var(--bd);min-width:46px;text-align:right}
+.res-subs{font-size:10.5px;color:var(--ts);margin-top:4px;line-height:1.5;padding-left:34px}
 .resp-table{width:100%;border-collapse:collapse}
 .resp-table th{font-size:11px;font-weight:600;color:var(--ts);text-transform:uppercase;letter-spacing:.5px;padding:8px 10px;text-align:left;border-bottom:1px solid var(--br)}
-.resp-table td{font-size:13px;color:var(--t);padding:10px;border-bottom:1px solid var(--bg)}
+.resp-table td{font-size:13px;color:var(--t);padding:10px;border-bottom:1px solid var(--bg);vertical-align:top}
 .resp-table tr:last-child td{border-bottom:none}
 .resp-table tr:hover td{background:var(--bg)}
-.av{width:32px;height:32px;border-radius:50%;background:var(--bl);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--bd)}
+.av{width:32px;height:32px;border-radius:50%;background:var(--bl);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--bd);flex-shrink:0}
 .cr-ok{background:#dcfce7;color:#166534;border-radius:99px;padding:3px 10px;font-size:11px;font-weight:700;display:inline-block}
 .cr-warn{background:#fef3c7;color:#92400e;border-radius:99px;padding:3px 10px;font-size:11px;font-weight:700;display:inline-block}
 .cr-bad{background:#fee2e2;color:#991b1b;border-radius:99px;padding:3px 10px;font-size:11px;font-weight:700;display:inline-block}
@@ -93,7 +94,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div class="hdr-row">
     <div>
       <h1>📊 AHP Удирдлагын самбар</h1>
-      <p>Хариуцагчдын нэгдсэн үр дүн</p>
+      <p>Хариуцагчдын нэгдсэн үр дүн — 8 ерөнхий шалгуур</p>
     </div>
     <button class="ref-btn" onclick="loadAndRender()">↻ Шинэчлэх</button>
   </div>
@@ -107,16 +108,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 <script>
 const crits=[
-  {id:"F1",label:"Хот суурины газруудыг холбон хөгжүүлэх боломж"},
-  {id:"F2",label:"Татагдах болон холбогдох хүн амын тоо"},
-  {id:"F3",label:"Бүс нутгийн хамтын ажиллагаа, тээврийн коридортой уялдах байдал"},
-  {id:"F4",label:"Хөрш орнуудын тээврийн коридортой холбогдох боломж"},
-  {id:"F5",label:"Аж үйлдвэрийн хөгжлийг дэмжих боломж"},
-  {id:"F6",label:"Нийт маршрутад эзлэх хувь (F6)"},
-  {id:"F7",label:"Хилийн боомтын нөхцөл байдал"},
-  {id:"F9",label:"Гадаргын бартаажилтын байдал"},
-  {id:"F10",label:"Бүс нутгийн эрчим хүчний хангамж"},
-  {id:"Ачаа",label:"Ачаа тээврийн боломж"}
+  { id:"C1", label:"Ачаа тээврийн хэмжээ",
+    subs:["Уул уурхайн бүтээгдэхүүний нөөц","Хүнд үйлдвэрийн бүтээгдэхүүний хэмжээ","Барилгын материалийн үйлдвэрлэлийн хэмжээ","Газар тариалангийн бүтээгдэхүүн үйлдвэрлэлийн хэмжээ"] },
+  { id:"C2", label:"Бүс нутгийн эдийн засгийн хамтын ажиллагаатай уялдаатай байдал",
+    subs:["CAREC","BRI","GTI","ESCAP","ОУТЗХАБ"] },
+  { id:"C3", label:"Хөрш орнуудын эдийн засгийн хамтын ажиллагаатай уялдаатай байдал",
+    subs:["TEA ROAD","CMREC"] },
+  { id:"C4", label:"Эрчим хүчний сүлжээнд хамрагдах байдал",
+    subs:["Эрчим хүчний эх үүсвэрийн ойр байдал","ЦДАШ-н ойр байдал"] },
+  { id:"C5", label:"Хилийн боомтын чадавхын үнэлгээ",
+    subs:["Хилийн боомтын дэглэм","Далайн боомт хүртэлх зай","Хилийн боомт — хөрш орны төмөр зам хоорондын холболт хийгдсэн эсэх"] },
+  { id:"C6", label:"Логистик төвтэй холбогдох боломж",
+    subs:["Хамгийн ойрын төмөр зам хүртэлх зай","Хамгийн ойр логистикийн төв хүртэлх зай"] },
+  { id:"C7", label:"Гадаад зах зээлийн үнэлгээ",
+    subs:["Хилийн орчмын бүсийн эдийн засгийн чадавх","ОХУ-ын экспортын нийлүүлэлт","Хятадын экспортын нийлүүлэлт","ОХУ-ын импортын эрэлт","Хятадын импортын эрэлт"] },
+  { id:"C8", label:"Орон нутгийн хөгжлийн төвүүдийн хүн амын төвлөрөл",
+    subs:["Хүн амын төвлөрлийн индекс"] }
 ];
 const n=crits.length;
 const pairs=[];
@@ -124,7 +131,7 @@ for(let i=0;i<n;i++) for(let j=i+1;j<n;j++) pairs.push([i,j]);
 const SM=[9,8,7,6,5,4,3,2,1,0.5,1/3,0.25,0.2,1/6,1/7,.125,1/9];
 const RI=[0,0,.58,.9,1.12,1.24,1.32,1.41,1.45,1.49,1.51];
 
-let API_URL=localStorage.getItem("ahp_api_url")||"https://script.google.com/macros/s/AKfycbw0tRnTsCVuPVySxliI1x2cZz04s8n2r3ED0zVfzkXGjRNWW_ki7oCi1pf8YjeWR9kJ/exec";
+let API_URL=localStorage.getItem("ahp_api_url")||"";
 
 function sv(i){return SM[parseInt(i)];}
 
@@ -165,7 +172,10 @@ function timeAgo(ts){
   return Math.floor(d/86400)+"өдрийн өмнө";
 }
 
-function initials(name){return name.trim().split(/\s+/).map(w=>w[0]).join("").slice(0,2).toUpperCase();}
+function initials(name){
+  if(!name) return "?";
+  return name.trim().split(/\s+/).map(w=>w[0]).join("").slice(0,2).toUpperCase();
+}
 
 function showToast(msg){
   const t=document.getElementById("toast");
@@ -187,7 +197,8 @@ async function fetchData(){
     const url=API_URL+(API_URL.includes('?')?'&':'?')+'callback='+cb;
     window[cb]=(data)=>{
       delete window[cb];
-      document.getElementById('jsonp-script')&&document.getElementById('jsonp-script').remove();
+      const s=document.getElementById('jsonp-script');
+      if(s) s.remove();
       resolve(data.responses||[]);
     };
     const s=document.createElement('script');
@@ -202,7 +213,16 @@ async function fetchData(){
 async function deleteResp(name){
   if(!confirm(`"${name}" -ийн хариуг устгах уу?`)) return;
   try{
-    await fetch(API_URL+"?action=delete&name="+encodeURIComponent(name));
+    await new Promise((resolve)=>{
+      const cb='del_cb_'+Date.now();
+      window[cb]=(data)=>{ delete window[cb]; const s=document.getElementById('del-script'); if(s) s.remove(); resolve(data); };
+      const s=document.createElement('script');
+      s.id='del-script';
+      s.src=API_URL+(API_URL.includes('?')?'&':'?')+'action=delete&name='+encodeURIComponent(name)+'&callback='+cb;
+      s.onerror=()=>{ delete window[cb]; resolve(null); };
+      document.head.appendChild(s);
+      setTimeout(()=>{ if(window[cb]){ delete window[cb]; resolve(null); } },8000);
+    });
     showToast("✓ Устгагдлаа");
     await loadAndRender();
   }catch(e){
@@ -213,18 +233,19 @@ async function deleteResp(name){
 function exportCSV(responses){
   const valid=responses.filter(r=>r.cr<0.2);
   const agg=aggregateGM(valid);
-  let csv="Кодирдлагын үр дүн\n\n";
+  let csv="\uFEFF";
+  csv+="Кодирдлагын үр дүн\n\n";
   if(agg){
-    csv+="Эрэмбэ,Код,Шалгуур,Жин (%)\n";
+    csv+="Эрэмбэ,Код,Ерөнхий шалгуур,Жин (%)\n";
     const sorted=crits.map((c,i)=>({...c,w:agg.weights[i]})).sort((a,b)=>b.w-a.w);
     sorted.forEach((c,r)=>{ csv+=(r+1)+","+c.id+",\""+c.label+"\","+(c.w*100).toFixed(2)+"\n"; });
     csv+="\n";
   }
-  csv+="Хариулагч,CR (%),Тогтворжилт,Огноо\n";
+  csv+="Хариулагч,Байгууллага,Албан тушаал,И-мэйл,CR (%),Тогтворжилт,Огноо\n";
   responses.forEach(r=>{
-    csv+=`"${r.name}",${(r.cr*100).toFixed(1)},${r.cr<0.2?"Тийм":"Үгүй"},"${new Date(r.ts).toLocaleString("mn-MN")}"\n`;
+    csv+=`"${r.name||''}","${r.org||''}","${r.position||''}","${r.email||''}",${(r.cr*100).toFixed(1)},${r.cr<0.2?"Тийм":"Үгүй"},"${new Date(r.ts).toLocaleString("mn-MN")}"\n`;
   });
-  const blob=new Blob(["\uFEFF"+csv],{type:"text/csv;charset=utf-8"});
+  const blob=new Blob([csv],{type:"text/csv;charset=utf-8"});
   const a=document.createElement("a");
   a.href=URL.createObjectURL(blob);
   a.download="AHP_Results.csv";
@@ -268,7 +289,6 @@ function renderSetup(main,append=false){
 
 function renderDash(main,responses){
   const valid=responses.filter(r=>r.cr<0.2);
-  const invalid=responses.filter(r=>r.cr>=0.2);
   const agg=aggregateGM(valid);
 
   let html="";
@@ -288,16 +308,21 @@ function renderDash(main,responses){
     const crOk=agg.CR<0.1;
     html+=`<div class="sec-lbl">Нэгдсэн жингийн үр дүн</div>
     <div class="card">
-      <div class="card-ttl">🏆 Шалгуур үзүүлэлтийн жин <span style="font-size:12px;color:var(--ts);font-weight:400">${agg.count} хариулагчийн нэгдсэн дундаж</span></div>
+      <div class="card-ttl">🏆 Ерөнхий шалгуур үзүүлэлтийн жин <span style="font-size:12px;color:var(--ts);font-weight:400">${agg.count} хариулагчийн нэгдсэн дундаж</span></div>
       <div class="meth-note">Геометрийн дундаж аргаар (AHP стандарт) CR&lt;20% хариуцагчдын нэгтгэл. Нэгдсэн CR: <strong style="color:${crOk?"var(--g)":"#d97706"}">${(agg.CR*100).toFixed(1)}%</strong></div>
       ${sorted.map((c,r)=>{
         const rk=r===0?"r1":r===1?"r2":r===2?"r3":"rn";
         const pct=Math.round(c.w/maxW*100);
         return`<div class="res-row">
           <div class="rank-b ${rk}">${r+1}</div>
-          <div class="res-name"><span class="res-code">${c.id}</span>${c.label}</div>
-          <div class="bar-bg"><div class="bar-fill" style="width:${pct}%"></div></div>
-          <div class="res-pct">${(c.w*100).toFixed(1)}%</div>
+          <div class="res-body">
+            <div class="res-toprow">
+              <div class="res-name"><span class="res-code">${c.id}</span>${c.label}</div>
+              <div class="bar-bg"><div class="bar-fill" style="width:${pct}%"></div></div>
+              <div class="res-pct">${(c.w*100).toFixed(1)}%</div>
+            </div>
+            <div class="res-subs">↳ ${(c.subs||[]).join(" · ")}</div>
+          </div>
         </div>`;
       }).join("")}
     </div>`;
@@ -313,20 +338,24 @@ function renderDash(main,responses){
   } else {
     html+=`<table class="resp-table">
       <thead><tr>
-        <th>Хариулагч</th><th>CR</th><th>Огноо</th><th></th>
+        <th>Хариулагч</th><th>Байгууллага / Тушаал</th><th>CR</th><th>Огноо</th><th></th>
       </tr></thead><tbody>
       ${responses.slice().reverse().map(r=>{
         const crCls=r.cr<0.1?"cr-ok":r.cr<0.2?"cr-warn":"cr-bad";
         const crTxt=(r.cr*100).toFixed(1)+"%";
+        const orgPos=[r.org,r.position].filter(Boolean).join(" — ");
         return`<tr>
           <td><div style="display:flex;align-items:center;gap:10px">
             <div class="av">${initials(r.name)}</div>
-            <div><div style="font-weight:600">${r.name}</div>
-            <div style="font-size:11px;color:var(--ts)">${timeAgo(r.ts)}</div></div>
+            <div>
+              <div style="font-weight:600">${r.name||"(нэргүй)"}</div>
+              <div style="font-size:11px;color:var(--ts)">${timeAgo(r.ts)}${r.email?' · '+r.email:''}</div>
+            </div>
           </div></td>
+          <td style="font-size:12px;color:var(--t)">${orgPos||'-'}</td>
           <td><span class="${crCls}">${crTxt}</span></td>
           <td style="font-size:12px;color:var(--ts)">${new Date(r.ts).toLocaleDateString("mn-MN")}</td>
-          <td><button class="del-btn" onclick="deleteResp('${r.name.replace(/'/g,"\\'")}')">×</button></td>
+          <td><button class="del-btn" onclick="deleteResp('${(r.name||'').replace(/'/g,"\\'")}')">×</button></td>
         </tr>`;
       }).join("")}
       </tbody></table>`;
@@ -337,7 +366,6 @@ function renderDash(main,responses){
   html+=`<div class="act-row">
     <button class="act-btn btn-export" onclick="exportCSV(${JSON.stringify(responses).replace(/</g,"\\u003c")})">📥 CSV татах</button>
     <button class="act-btn btn-ref" onclick="loadAndRender()">↻ Шинэчлэх</button>
-    <button class="act-btn btn-del" onclick="if(confirm('Бүх хариуг устгах уу?')){}">🗑 Бүгдийг устгах</button>
   </div>`;
 
   // API settings (collapsed)
